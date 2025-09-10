@@ -37,36 +37,38 @@
 #include "Particle.h"
 #include "DFRobot_RainfallSensor.h"
 
-Log.info("Establishing UART connection to rainfall sensor");//Trying to see where code stops
-
-// UART version (use Boron hardware serial pins)
-DFRobot_RainfallSensor_UART rainfallSensor(Serial1);
-
-Log.info("About to enter setup");
+// Pointer for the UART rainfall sensor
+DFRobot_RainfallSensor_UART* rainfallSensor;
 
 void setup() {
+    // Start Serial1 for UART communication with the sensor
     Serial1.begin(9600);
-    delay(1000);
+    delay(1000); // allow Serial1 to stabilize
 
-    Log.info("About to initialize rainfall sensor");
+    Log.info("Starting rainfall sensor setup...");
 
-    while (!rainfallSensor.begin()) {
+    // Initialize the sensor object after Serial1 is ready
+    rainfallSensor = new DFRobot_RainfallSensor_UART(Serial1);
+
+    // Attempt sensor initialization
+    while (!rainfallSensor->begin()) {
         Log.info("Rainfall sensor init failed (UART)!");
-        delay(3000);
+        delay(3000); // wait and retry
     }
-    Log.info("Rainfall sensor (UART) init success!");
 
-    Log.info("Firmware version: %s\n", rainfallSensor.getFirmwareVersion().c_str());
-    // Log.info("VID: 0x%X\n", rainfallSensor.vid);
-    // Log.info("PID: 0x%X\n", rainfallSensor.pid);
+    Log.info("Rainfall sensor initialized successfully!");
+    Log.info("Firmware version: %s", rainfallSensor->getFirmwareVersion().c_str());
+
     delay(1000);
 }
 
 void loop() {
-    Log.info("Working time: %.2f h\n", rainfallSensor.getSensorWorkingTime());
-    Log.info("Rainfall total: %.2f mm\n", rainfallSensor.getRainfall());
-    //Log.info("1-hour rainfall: %.2f mm\n", rainfallSensor.getRainfallTime(1));
-    Log.info("Raw bucket counts: %lu\n", rainfallSensor.getRawData());
+
+    // Read and log sensor data
+    Log.info("Rainfall total: %.2f mm", rainfallSensor->getRainfall());
+    Log.info("Sensor working time: %.2f h", rainfallSensor->getSensorWorkingTime());
+    Log.info("Raw bucket counts: %lu", rainfallSensor->getRawData());
     Log.info("-----------------------------");
+
     delay(1000);
 }
