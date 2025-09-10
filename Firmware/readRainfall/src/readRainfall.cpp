@@ -1,35 +1,72 @@
-/* 
- * Project myProject
- * Author: Your Name
- * Date: 
- * For comprehensive documentation and examples, please visit:
- * https://docs.particle.io/firmware/best-practices/firmware-template/
- */
+//--------------------Creation from OWL data + DF Robot functions-----
 
-// Include Particle Device OS APIs
+// #include "Particle.h"
+// #include "SdFat.h"
+
+// //------------------Rainfall Sensor via digital tipping bucket
+// const int RAIN_PIN = RX;        // digital pin connected to tipping bucket
+// volatile uint32_t rainfall_tips = 0;
+// float rainfall_mm = 0.0;
+// const float MM_PER_TIP = 0.2794; // mm per tip
+
+// void rainfallISR() {
+//     rainfall_tips++;
+
+//     delay (3000);
+
+//     rainfall_mm = rainfall_tips * MM_PER_TIP;
+// }
+
+// void setup() {
+//     Serial.begin(9600);
+    
+//     // LED pin
+//     pinMode(led, OUTPUT);
+
+//     // Rainfall sensor ISR
+//     pinMode(RAIN_PIN, INPUT_PULLUP);
+//     //attachInterrupt(RAIN_PIN, rainfallISR, FALLING);
+// }
+
+// Log.info(rainfall_mm);
+
+
+
+//------------ DFRobot rainfall read adapted to Particle Boron--------//
+
 #include "Particle.h"
+#include "DFRobot_RainfallSensor.h"
 
-// Let Device OS manage the connection to the Particle Cloud
-SYSTEM_MODE(AUTOMATIC);
+Log.info("Establishing UART connection to rainfall sensor");//Trying to see where code stops
 
-// Run the application and system concurrently in separate threads
-SYSTEM_THREAD(ENABLED);
+// UART version (use Boron hardware serial pins)
+DFRobot_RainfallSensor_UART rainfallSensor(Serial1);
 
-// Show system, cloud connectivity, and application logs over USB
-// View logs with CLI using 'particle serial monitor --follow'
-SerialLogHandler logHandler(LOG_LEVEL_INFO);
+Log.info("About to enter setup");
 
-// setup() runs once, when the device is first turned on
 void setup() {
-  // Put initialization like pinMode and begin functions here
+    Serial1.begin(9600);
+    delay(1000);
+
+    Log.info("About to initialize rainfall sensor");
+
+    while (!rainfallSensor.begin()) {
+        Log.info("Rainfall sensor init failed (UART)!");
+        delay(3000);
+    }
+    Log.info("Rainfall sensor (UART) init success!");
+
+    Log.info("Firmware version: %s\n", rainfallSensor.getFirmwareVersion().c_str());
+    // Log.info("VID: 0x%X\n", rainfallSensor.vid);
+    // Log.info("PID: 0x%X\n", rainfallSensor.pid);
+    delay(1000);
 }
 
-// loop() runs over and over again, as quickly as it can execute.
 void loop() {
-  // The core of your code will likely live here.
-
-  // Example: Publish event to cloud every 10 seconds. Uncomment the next 3 lines to try it!
-  // Log.info("Sending Hello World to the cloud!");
-  // Particle.publish("Hello world!");
-  // delay( 10 * 1000 ); // milliseconds and blocking - see docs for more info!
+    Log.info("Working time: %.2f h\n", rainfallSensor.getSensorWorkingTime());
+    Log.info("Rainfall total: %.2f mm\n", rainfallSensor.getRainfall());
+    //Log.info("1-hour rainfall: %.2f mm\n", rainfallSensor.getRainfallTime(1));
+    Log.info("Raw bucket counts: %lu\n", rainfallSensor.getRawData());
+    Log.info("-----------------------------");
+    delay(1000);
 }
