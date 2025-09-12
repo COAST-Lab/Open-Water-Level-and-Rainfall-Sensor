@@ -1,0 +1,20 @@
+{
+    "configurations": [
+        {
+            "name": "Win32",
+            "includePath": [
+                "${workspaceFolder}/src",
+                "${workspaceFolder}/lib/**",
+                "${workspaceFolder}/**",
+                "C:/Users/ppita/.particle/toolchains/deviceOS/**"
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE"
+            ],
+            "configurationProvider": "particle.particle-vscode-core"
+        }
+    ],
+    "version": 4
+}
