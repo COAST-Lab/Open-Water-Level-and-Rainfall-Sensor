@@ -1,60 +1,58 @@
-/*!
- * @file  DFRobot_RainfallSensor.cpp
- * @brief  Define infrastructure of DFRobot_RainfallSensor class
- * @details  This library implements all the functions of communicating with the SEN0575 device, including configuring device parameters and reading device data.
- * @copyright  Copyright (c) 2010 DFRobot Co.Ltd (http://www.dfrobot.com)
- * @license  The MIT License (MIT)
- * @author  [fary](feng.yang@dfrobot.com)
- * @version  V1.0
- * @date  2023-01-28
- * @url  https://github.com/DFRobot/DFRobot_RainfallSensor
- */
-#include "DFRobot_RainfallSensor.h"
+/#include "DFRobot_RainfallSensor.h"
 
-DFRobot_RainfallSensor:: DFRobot_RainfallSensor(uint8_t mode){
-  _mode = mode;
-  pid = 0;
-  vid = 0;
+DFRobot_RainfallSensor_UART::DFRobot_RainfallSensor_UART(Stream &serial)
+  : _serial(serial) {}
+
+bool DFRobot_RainfallSensor_UART::begin() {
+  // If your sensor needs init commands, send here.
+  return true;
 }
 
-bool DFRobot_RainfallSensor::begin(void)
-{
-  return getPidVid();
-}
-
-String DFRobot_RainfallSensor::getFirmwareVersion(void)
-{
-  uint16_t version = 0;
-  if(_mode == IIC_MODE){
-    uint8_t buff[2] = {0};
-    readRegister(I2C_REG_VERSION, (void*)buff, 2);
-    version = buff[0] | ( ((uint16_t)buff[1]) << 8 );
-  }else{
-    version = readRegister(eInputRegVersionSEN0575);
+String DFRobot_RainfallSensor_UART::getFirmwareVersion() {
+  // Example: query sensor over UART
+  _serial.println("AT+VER?");
+  delay(50);
+  String response = "";
+  while (_serial.available()) {
+    response += (char)_serial.read();
   }
-  return String( version >> 12 ) + '.' + String( ( ( version >> 8 ) & 0x0F ) ) + '.' + String( ( ( version >> 4 ) & 0x0F ) ) + '.' + String( ( version & 0x0F ) );
+  return response.length() ? response : "Unknown";
 }
 
-bool DFRobot_RainfallSensor::getPidVid(void)
-{
-  bool ret = false;
-  if( _mode == IIC_MODE ){
-    uint8_t buff[4] = {0};
-    readRegister( I2C_REG_PID, (void*)buff, 4 );
-    pid = buff[0] | ( ( (uint16_t)buff[1] ) << 8 ) | ( ( (uint32_t)( buff[3] & 0xC0 ) ) << 10 );
-    vid = buff[2] | (uint16_t)( ( buff[3] & 0x3F ) << 8 );
-  }else{
-    pid = readRegister( eInputRegPidSEN0575 );
-    vid = readRegister( eInputRegVidSEN0575 );
-    pid = ( vid & 0xC000 ) << 2 | pid;
-    vid = vid & 0x3FFF;
-  }
-  if( ( vid == 0x3343 ) && ( pid == 0x100C0 ) ){
-    ret = true;
-  }
-  return ret;
+float DFRobot_RainfallSensor_UART::getRainfall() {
+  // TODO: implement proper protocol for your sensor
+  return 0.0f;
 }
 
+float DFRobot_RainfallSensor_UART::getRainfall(uint8_t hour) {
+  // TODO: hourly history if supported
+  return 0.0f;
+}
+
+uint32_t DFRobot_RainfallSensor_UART::getRawData() {
+  // TODO: raw counter from sensor
+  return 0;
+}
+
+uint8_t DFRobot_RainfallSensor_UART::setRainAccumulatedValue(float accumulatedValue) {
+  // TODO: send accumulated value reset if supported
+  return 1;
+}
+
+float DFRobot_RainfallSensor_UART::getSensorWorkingTime() {
+  // TODO: query uptime if supported
+  return 0.0f;
+}
+
+uint16_t DFRobot_RainfallSensor_UART::readRegister(uint16_t reg) {
+  // Placeholder – implement if your sensor supports reg read over UART
+  return 0;
+}
+
+uint16_t DFRobot_RainfallSensor_UART::writeRegister(uint16_t reg, uint16_t data) {
+  // Placeholder – implement if your sensor supports reg write over UART
+  return 0;
+}
 float DFRobot_RainfallSensor::getRainfall(void)
 {
   uint32_t rainfall=0;
