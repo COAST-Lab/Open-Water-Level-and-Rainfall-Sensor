@@ -3,24 +3,32 @@
 #include "Particle.h"
 #include "DFRobot_RainfallSensor.h"
 
-DFRobot_RainfallSensor_UART Sensor(Serial1);  // Pass Serial1 by reference, not pointer
 
+DFRobot_RainfallSensor_UART Sensor(Serial1);
 
 void setup() {
-    Log.info("Setup started");
-    Serial1.begin(9600);
+    Serial1.begin(9600);  // UART to sensor
+    Serial.begin(115200); // USB debugging
+    delay(1000);
 
-    while(!Sensor.begin()) {
-        Log.error("Sensor init err!!!");
+    // Initialize sensor
+    while (!Sensor.begin()) {
+        Log.info("Sensor init err!!!");
         delay(1000);
     }
 
-    Log.info("Version:\t");
+    Log.info("Firmware Version:\t");
     Log.info(Sensor.getFirmwareVersion());
 }
 
 void loop() {
+    // Log via Particle console
+    Log.info("Sensor WorkingTime: %lu H", Sensor.getSensorWorkingTime());
+    Log.info("Rainfall: %.2f mm", Sensor.getRainfall());
+    Log.info("1 Hour Rainfall: %.2f mm", Sensor.getRainfall(1));
+    Log.info("Raw Tipping Counts: %lu", Sensor.getRawData());
 
+    // Also print via USB for debugging
     Log.info("Sensor WorkingTime: %lu H", Sensor.getSensorWorkingTime());
     Log.info("Rainfall: %.2f mm", Sensor.getRainfall());
     Log.info("1 Hour Rainfall: %.2f mm", Sensor.getRainfall(1));
@@ -28,5 +36,6 @@ void loop() {
 
     delay(1000);
 }
+
 
 
