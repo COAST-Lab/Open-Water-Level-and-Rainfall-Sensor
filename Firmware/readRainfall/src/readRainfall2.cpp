@@ -1,15 +1,15 @@
 //------------ DFRobot rainfall read adapted to Particle Boron--------//
 
 #include "Particle.h"
-#include "Arduino.h"
+//#include "Arduino.h"
 #include "DFRobot_RainfallSensor.h"
 
 
-DFRobot_RainfallSensor_UART Sensor(Serial1);
+DFRobot_RainfallSensor_I2C Sensor(&Wire);
 
 void setup() {
     Serial1.begin(9600);  // UART to sensor
-    Serial.begin(115200); // USB debugging
+    //Serial.begin(115200); // USB debugging
     delay(1000);
 
     // Initialize sensor
