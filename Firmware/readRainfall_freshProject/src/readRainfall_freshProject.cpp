@@ -28,7 +28,7 @@ void setup() {
 
     // Serial1.begin(9600);  // UART to sensor
     //Serial.begin(115200); // USB debugging
-    delay(1000);
+    delay(5000);
 
     // Initialize sensor
     while (!Sensor.begin()) {
