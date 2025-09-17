@@ -1,3 +1,5 @@
+
+
 /* 
  * Project myProject
  * Author: Your Name
@@ -25,15 +27,25 @@ DFRobot_RainfallSensor_I2C Sensor(&Wire);
 
 void setup() {
     Cellular.off(); // Disable cellular modem to save power
-
+ 
     // Serial1.begin(9600);  // UART to sensor
     //Serial.begin(115200); // USB debugging
     delay(5000);
+    Log.info("Starting...");
+
+    // Initialize the I2C bus if not already enabled, from Particle docs
+    if (!Wire.isEnabled()) {
+        Wire.begin();
+    }
+
+    Wire.beginTransmission(0x1D); // Address of the rainfall sensor
+
+    delay(1000);
 
     // Initialize sensor
     while (!Sensor.begin()) {
         Log.info("Sensor init err!!!");
-        delay(1000);
+        delay(1000); 
     }
 
     // Log.info("Firmware Version:\t");
