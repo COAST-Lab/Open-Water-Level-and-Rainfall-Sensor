@@ -38,7 +38,7 @@ char data[120];
 FuelGauge batteryMonitor;
 
 //------------------Rainfall Sensor via digital tipping bucket
-const int RAIN_PIN = RX;        // digital pin connected to tipping bucket
+const int RAIN_PIN = D0;        // digital pin connected to tipping bucket
 volatile uint32_t rainfall_tips = 0;
 float rainfall_mm = 0.0;
 const float MM_PER_TIP = 0.2794; // mm per tip
