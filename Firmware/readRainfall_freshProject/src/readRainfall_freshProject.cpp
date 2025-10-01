@@ -29,7 +29,6 @@ void setup() {
 }
 
 
-
 void loop() {
     
     static unsigned long lastPrint = 0;
