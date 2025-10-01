@@ -1,8 +1,9 @@
 #include "Particle.h"
 
+//Derived from Particle Forum Conversation
 
-const int reedPin = D2;     
-const int vccPin  = D3;     
+const int reedPin = D0;     
+const int vccPin  = D1;     
 
 const unsigned long debounce = 1000; 
 const float bucketValue = 0.2794;    
@@ -13,8 +14,9 @@ volatile unsigned long previousRain = 0;
 
 void gotRain(); 
 
+SerialLogHandler logHandler(LOG_LEVEL_ALL);
+
 void setup() {
-    Cellular.off();
     Serial.begin(9600);
     pinMode(vccPin, OUTPUT);
     digitalWrite(vccPin, HIGH);
@@ -22,7 +24,7 @@ void setup() {
   
     pinMode(reedPin, INPUT_PULLDOWN);
 
-  
+
     attachInterrupt(reedPin, gotRain, RISING);
 
     Serial.println("Rainfall sensor initialized...");
