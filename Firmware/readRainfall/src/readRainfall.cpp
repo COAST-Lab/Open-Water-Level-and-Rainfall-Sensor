@@ -1,7 +1,8 @@
 //------------ DFRobot rainfall read adapted to Particle Boron--------//
 
 #include "Particle.h"
-#include "DFRobot_RainfallSensor.h"
+#include "DFRobo
+t_RainfallSensor.h"
 
 SYSTEM_MODE(SEMI_AUTOMATIC);
 
