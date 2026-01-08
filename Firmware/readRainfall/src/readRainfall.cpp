@@ -1,14 +1,14 @@
 //------------ DFRobot rainfall read adapted to Particle Boron--------//
 
 #include "Particle.h"
-#include "DFRobo
-t_RainfallSensor.h"
+#include "DFRobot_RainfallSensor.h"
 
 SYSTEM_MODE(SEMI_AUTOMATIC);
 
 DFRobot_RainfallSensor_I2C Sensor(&Wire);
 
-SerialLogHandler logHandler(LOG_LEVEL_INFO);
+SerialLogHandler logHandler(LOG_
+    LEVEL_INFO);
 
 void setup() {
     Cellular.off();
@@ -29,11 +29,11 @@ void setup() {
 
 void loop() {
     // Log via Particle console
-    Log.info("Sensor WorkingTime: %.2f H", Sensor.getSensorWorkingTime());
+    //Log.info("Sensor WorkingTime: %.2f H", Sensor.getSensorWorkingTime());
     Log.info("Rainfall: %.2f mm", Sensor.getRainfall());
     Log.info("1 Hour Rainfall: %.2f mm", Sensor.getRainfall(1));
     Log.info("Raw Tipping Counts: %lu", Sensor.getRawData());
 
     Log.info("looping");
-    delay(1000);
+    delay(10000);
 }
