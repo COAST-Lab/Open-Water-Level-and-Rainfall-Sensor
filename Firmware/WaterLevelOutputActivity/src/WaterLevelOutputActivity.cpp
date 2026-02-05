@@ -69,6 +69,6 @@ void loop() {
     display.println("ADC Value:");
     display.println(distance_unconverted);
     display.display(); 
-    delay(1000); 
+    delay(100); 
 }
 
