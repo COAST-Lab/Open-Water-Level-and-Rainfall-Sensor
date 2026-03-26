@@ -28,7 +28,7 @@ v) Fit the assembled sensor into the enclosure placing the black locknut inside 
    
 3. Attaching the electronics to the PCB
    
-i) Solder the Gravity Sensor to the corresponding vias under the PCB. This will require stripping the wires from the Gravity sensor. The circuit diagram here shows correct connections.
+i) Solder the Gravity Sensor to the corresponding vias under the PCB. This will require stripping the wires from the Gravity sensor. The circuit diagram [here](https://github.com/COAST-Lab/Open-Water-Level-and-Rainfall-Sensor/blob/7bba7204df4ac1aff715286652a65af4b2cf0a13/Fabrication/OWLR%20Circuit%20Diagram.jpg) shows correct connections.
    
 ii)  Mount the Feather Tripler PCB into the enclosure using the 4 mounting screws. Tighten down with the screwdriver to secure in place
   
