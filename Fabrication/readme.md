@@ -1,6 +1,8 @@
-Here is a guide for building the Open Water Level and Precipitation Sensor. Some directions are derived from the IORodeo site which this sensor was adapted from. 
+**Here is a guide for building the Open Water Level and Precipitation Sensor. Some directions are derived from the IORodeo site which this sensor was adapted from.**
 
-1. The Polycase shipped with this kit is a 5.1 x 3.7 x 2.2 inches weatherproof enclosure with 10 optional M16/20 knockouts. For convenience, 3 of the M20 knockouts have already been removed as shown in the image below. You will also remove the knockout next to this one for the rainfall cable. In this step you will further prepare the enclosure by attaching the mounting feet, the PCB mounting hardware and adding the vent plug to the vent hole.
+**1. Prepare the Enclosure**
+
+The Polycase shipped with this kit is a 5.1 x 3.7 x 2.2 inches weatherproof enclosure with 10 optional M16/20 knockouts. For convenience, 3 of the M20 knockouts have already been removed as shown in the image below. You will also remove the knockout next to this one for the rainfall cable. In this step you will further prepare the enclosure by attaching the mounting feet, the PCB mounting hardware and adding the vent plug to the vent hole.
    
 i) Attach the 4 mounting feet to the base of the enclosure using a hammer to gently tap the feet into place
    
@@ -10,7 +12,7 @@ iii) Unscrew to separate the two parts of the vent plug. Place the vent part int
 
 
   
-2. Mounting the MaxSonar ultrasonic distance sensor
+**2. Mounting the MaxSonar ultrasonic distance sensor**
 
 Note: The XL-MaxSonar-WRMA1 in the kit comes with an adapter PCB pre-mounted for easy, solder-less connection to the electronics. To use the MaxSonar distance sensor with the waterproof enclosure, it is first modified to fit the M20 knockout using a 0.75" to 0.5" reducer pipe fitting. An extending pipe (1.85" long) fits over the adapter before connecting to the reducer. These steps cover attaching the cable, pipe fittings and mounting the sensor into the enclosure.
 
@@ -26,7 +28,7 @@ v) Fit the assembled sensor into the enclosure placing the black locknut inside 
 
 
    
-3. Attaching the electronics to the PCB
+**3. Attaching the electronics to the PCB**
    
 i) Solder the Gravity Sensor to the corresponding vias under the PCB. This will require stripping the wires from the Gravity sensor. The circuit diagram [here](https://github.com/COAST-Lab/Open-Water-Level-and-Rainfall-Sensor/blob/7bba7204df4ac1aff715286652a65af4b2cf0a13/Fabrication/OWLR%20Circuit%20Diagram.jpg) shows correct connections.
    
@@ -38,7 +40,7 @@ iv) Connect the cable from the MaxSonar to the middle JST PH 4-pin connector (J3
 
 
   
-4. Flashing Firmware and Integrating Particle
+**4. Flashing Firmware and Integrating Particle**
    
 i) Flash the code here to the Boron. 
   
@@ -46,7 +48,7 @@ ii) To use cellular, follow the instructions here to integrate your Boron with G
 
 
  
-5. Prepare the Rainfall Sensor
+**5. Prepare the Rainfall Sensor**
     
 i) Use the middle knockout to attach the Plastic Submersible Cord Grip .39-.55". This may require shaving a wider circumference on the knockout to fit this cord grip. 
   
@@ -56,7 +58,7 @@ iii) Due to know specific placement for the gravity sensor, electrical tape was 
 
 
 
-6. Prepare the Solar Power system
+**6. Prepare the Solar Power system**
    
 i) Take the waterproof cable entry out of its bag and unscrew to separate into the 3 individual parts shown below. Push the rubber ring out of the main part.
   
