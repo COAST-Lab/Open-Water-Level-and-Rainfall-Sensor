@@ -1,4 +1,4 @@
-**Here is a guide for building the Open Water Level and Precipitation Sensor. Some directions are derived from the IORodeo site which this sensor was adapted from.**
+**Here is a guide for building the Open Water Level and Precipitation Sensor. Some directions are derived from the IORodeo site which this sensor was adapted from. A BOM can be found [here](https://github.com/COAST-Lab/Open-Water-Level-and-Rainfall-Sensor/tree/d36a67804bb3516f8769341ffb8f02172248dd15/Fabrication/Bill%20of%20Materials).**
 
 **1. Prepare the Enclosure**
 
