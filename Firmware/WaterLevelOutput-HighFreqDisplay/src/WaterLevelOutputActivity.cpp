@@ -50,7 +50,7 @@ void loop() {
   display.setRotation(2); //rotates text on OLED 1=90 degrees, 2=180 degrees
   display.println("Distance");
   display.print(range_cm);
-  display.println(" (cm)");
+  display.println(" f(cm)");
   display.display(); 
 
   // Set analog read and display max frequency (could be slower depending on display speed)
